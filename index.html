@@ -100,25 +100,12 @@
     flex-wrap:wrap;
     margin-bottom:10px;
   }
-  #search{
-    flex:1;
-    min-width:220px;
-    padding:10px 12px;
-    border:1.5px solid var(--arctic-gray);
-    border-radius:8px;
-    font-size:14px;
-    color:var(--classic-blue);
-  }
-  #search:focus{
-    outline:2px solid var(--electric-blue);
-    border-color:var(--electric-blue);
-  }
   .search-input-wrap{
     position:relative;
     flex:1;
     min-width:220px;
   }
-  .search-input-wrap #contactSearch{
+  .search-input-wrap input[type="text"]{
     width:100%;
     padding:10px 34px 10px 12px;
     border:1.5px solid var(--arctic-gray);
@@ -127,7 +114,7 @@
     color:var(--classic-blue);
     box-sizing:border-box;
   }
-  .search-input-wrap #contactSearch:focus{
+  .search-input-wrap input[type="text"]:focus{
     outline:2px solid var(--electric-blue);
     border-color:var(--electric-blue);
   }
@@ -645,7 +632,10 @@
 <div id="marketsView" class="view active">
   <div class="controls">
     <div class="search-row">
-      <input type="text" id="search" placeholder="Search market, carrier, contact, state, or appetite...">
+      <div class="search-input-wrap">
+        <input type="text" id="search" placeholder="Search market, carrier, contact, state, or appetite...">
+        <button type="button" id="btnClearSearch" class="clear-search-btn" title="Clear search" aria-label="Clear search">&times;</button>
+      </div>
       <select id="stateFilter">
         <option value="">All States</option>
       </select>
@@ -1022,6 +1012,8 @@ function render(){
   document.getElementById('resultCount').textContent = `Showing ${shown} of ${DATA.length} markets`;
   document.getElementById('emptyState').style.display = shown === 0 ? '' : 'none';
 
+  document.getElementById('btnClearSearch').classList.toggle('visible', !!state.search);
+
   saveState();
 }
 
@@ -1041,6 +1033,12 @@ function copyToClipboard(text, btn, originalLabel, successLabel){
 document.getElementById('search').addEventListener('input', e => {
   state.search = e.target.value;
   render();
+});
+document.getElementById('btnClearSearch').addEventListener('click', () => {
+  state.search = '';
+  document.getElementById('search').value = '';
+  render();
+  document.getElementById('search').focus();
 });
 document.getElementById('sortBy').addEventListener('change', e => {
   state.sortBy = e.target.value;
