@@ -1362,13 +1362,13 @@ const DATA = [
     "name": "Nirvana Insurance",
     "carrier": "A rated, backed by top-tier global reinsurers",
     "contact": "Ashley Estrada / Katie McCartney / Joe Silvestro / Michele Smith / Jo Gonzalez",
-    "title": "Business Development Manager / Fleet Senior BDM / New Business Senior UW / Renewal UW / Non-Fleet BDM",
-    "phone": "Ashley: 210-605-7584 / Katie: 614-245-5039 / Joe: 650-229-8546 / Jo: 941-888-0309",
+    "title": "Senior Manager, Strategic Accounts / Senior Business Dev Manager (Fleet) / Senior Underwriter, New Business / Underwriter, Renewal Business / Non-Fleet BDM",
+    "phone": "Ashley: 210-605-7584 / Katie: 614-245-5039 / Joe: 650-229-8546 / Michele: 614-321-8007 / Jo: 941-888-0309",
     "email": "katie@nirvanatech.com / Joseph@nirvanatech.com / michele@nirvanatech.com / jo@nirvanatech.com",
-    "states": "28+ states (rapidly expanding)",
-    "fleet": "Fleet 10+ units; Non-Fleet 1-9 units",
-    "wants": "AI-native platform, $1.5B valuation\n• FLEET & NON-FLEET: AL, APD, GL, MTC\n• AI Safety Intelligence Platform included, up to 20% upfront telematics discount\n• Telematics required",
-    "notwants": "Non-telematics operations.",
+    "states": "28 states, Fleet only (10+ PUs): WA, OR, CA*, NV, UT, CO, AZ, NM, TX, OK, KS, NE, MN, IA, MO, AR, WI, IL, IN, MI, OH, KY, TN, NC, SC, GA, AL, PA. *CA non-admitted, all others admitted. Non-Fleet footprint expanding separately.",
+    "fleet": "Fleet: 10+ power units (min. 10 active drivers). Non-Fleet: 1-9 units. Telematics enabled, safety-focused fleets only. Radius: local to long haul. Years in business: 2+ years under authority with continuous insurance coverage. Operations: dry van, flatbed, heavy haul, intermodal, non-hazmat tanker, reefer, box truck, dump (belly & hopper bottom only).",
+    "wants": "AI-native platform, $1.5B valuation\n• FLEET & NON-FLEET: AL, APD, GL, MTC\n• AI Safety Intelligence Platform included, up to 20% upfront telematics discount\n• Telematics required, willing to connect at application and stay connected for the policy term",
+    "notwants": "Non-telematics operations.\n• Ineligible if greater than 5% of operations in: auto haul, driveaway, dump (side/end), expedited, hazmat, last mile, livestock, logging, residential delivery, waste",
     "coverage_raw": "AL, APD, GL, MTC",
     "coverage_tags": [
       "AL",
@@ -1376,10 +1376,16 @@ const DATA = [
       "GL",
       "MTC"
     ],
-    "notes": "15x faster underwriting claimed, 30B+ miles analyzed, best-in-class loss ratios\n• Full onboarding completed 5/7/26\n• Endorsement requests: email uw@nirvanatech.com with policy name/number, request details, and any ancillary docs\n• Portals: agents.nirvanatech.com (submissions/apps), safety.nirvanatech.com (claims status/safety), academy.nirvanatech.com (training)",
-    "updated": "2026-05",
+    "notes": "15x faster underwriting claimed, 30B+ miles analyzed, best-in-class loss ratios\n• Full onboarding completed 5/7/26\n• Endorsement requests: email uw@nirvanatech.com with policy name/number, request details, and any ancillary docs\n• **Agents App** (agents.nirvanatech.com): submit applications, check appetite, track status\n• **Safety Platform** (safety.nirvanatech.com): claims status, safety data, FMCSA lookup\n• **Agent Academy** (academy.nirvanatech.com/trainings): training and sales resources\n• **Privacy Promise** (nirvanatech.com/privacy-promise): data handling commitments\n• Limits & deductibles: AL up to $1M CSL (Standard ded. up to $10k, no collateral; High up to $100k) / GL $1M occ, $2M agg (Standard up to $10k; High up to $25k) / Physical Damage ACV or Stated Value (Standard up to $10k combined APD/MTC; High up to $25k combined) / MTC up to $250k, with additional coverages (earned freight charges, loss mitigation expenses, removal expenses, misc equipment, debris removal) now up to $35k\n• Telematics: premier integration partner required for all risks; 3+ months of historical data required; GPS, ELD, or AI cameras accepted; all vehicles on the policy must share the same provider; 70+ approved partners incl. Motive, Samsara, Verizon Connect, Geotab\n• Claims: 24/7 line 1-888-383-8614, email reportaclaim@nirvanatech.com, or report online at safety.nirvanatech.com; 100% US-based in-house adjusters; 24-hour first response guaranteed; 2x faster resolution than average TPA\n• Payment options: Monthly (15% non-working deposit due within 15 days of bind, recommended) or Paid in Full (no deposit, due within 5 days of bind; premium financing available when set up through agency)\n• Nirvana Perks: insureds save 10-50% on safety, ELD/dashcam, driver compliance, and maintenance vendors at nirvanatech.com/perks",
+    "updated": "2026-08",
     "gap": false,
-    "wc_only": false
+    "wc_only": false,
+    "docs": [
+      {
+        "label": "2026 Fleet Program Onboarding Deck",
+        "file": "HUB_FL_Fleet_Onboarding_5_7_2026.pdf"
+      }
+    ]
   },
   {
     "name": "One80 Intermediaries / Ambyr",
@@ -1788,11 +1794,15 @@ function escapeHtml(s){
   return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+function boldify(s){
+  return escapeHtml(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+
 function linesToList(text){
   if(!text) return '';
   const parts = text.split(/\n|•/).map(s => s.trim()).filter(Boolean);
-  if(parts.length <= 1) return `<span>${escapeHtml(text)}</span>`;
-  return `<ul>${parts.map(p => `<li>${escapeHtml(p)}</li>`).join('')}</ul>`;
+  if(parts.length <= 1) return `<span>${boldify(text)}</span>`;
+  return `<ul>${parts.map(p => `<li>${boldify(p)}</li>`).join('')}</ul>`;
 }
 
 function needToObtain(text){
