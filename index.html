@@ -232,6 +232,12 @@
     flex-direction:column;
     gap:8px;
     transition:box-shadow 0.15s ease, transform 0.15s ease;
+    height:220px;
+    overflow:hidden;
+  }
+  .card.open{
+    height:auto;
+    overflow:visible;
   }
   .card:hover{
     box-shadow:0 4px 14px rgba(38,55,70,0.14);
@@ -255,6 +261,12 @@
     font-weight:700;
     color:var(--classic-blue);
     line-height:1.25;
+  }
+  .card:not(.open) .card-title{
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
   }
   .badges{
     display:flex;
@@ -354,10 +366,19 @@
     font-style:italic;
     margin-top:-4px;
   }
+  .card:not(.open) .carrier{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
   .cov-tags{
     display:flex;
     gap:5px;
     flex-wrap:wrap;
+  }
+  .card:not(.open) .cov-tags{
+    max-height:24px;
+    overflow:hidden;
   }
   .cov-tag{
     background:var(--electric-blue);
@@ -1884,7 +1905,7 @@ const DATA = [
   {
     "name": "TUMI (Trinity Underwriting Managers) - AmWins Underwriting",
     "carrier": "Multiple A+XV carriers including Obsidian\n• Trinity Insurance Company for approved-appointment states\nPER-PROGRAM RATINGS/BASIS (per TUMI program flyers, v.9.21/v.10.21):\n• DUMP TRUCKS: A.M. Best A+ (Excellent), admitted & non-admitted\n• INTERMODAL: A.M. Best A+ (Excellent), admitted & non-admitted\n• TOWING: A.M. Best A (Excellent), admitted & non-admitted\n• REPOSSESSION: A.M. Best A (Excellent), non-admitted only",
-    "contact": "Sara Rodriguez (Intermodal) / Rob Mills (Tow & Repo) / Nick Blankenship (Sand & Gravel/Brokerage) / Heather McKenna (Technical Assistant)",
+    "contact": "Sara Rodriguez (Intermodal) / Rob Mills (Tow & Repo) / Nick Blankenship (Sand & Gravel, Brokerage) / Heather McKenna (Technical Assistant)",
     "title": "Underwriter / Senior Underwriter / Broker & Program Manager / Technical Assistant",
     "phone": "Sara: 912-450-7011 / Rob: 912-450-7013 (or 7500) / Nick: 912-450-8721 / Heather: 912-450-7022",
     "email": "Sara.rodriguez@tumi-ins.com / Rob@tumi-ins.com / Nblankenship@tumi-ins.com / heather.mckenna@amwins.com",
