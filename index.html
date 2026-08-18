@@ -65,26 +65,6 @@
     outline:2px solid var(--electric-blue);
     outline-offset:2px;
   }
-  .stats-bar{
-    display:flex;
-    gap:14px;
-    padding:14px 28px;
-    background:var(--classic-light);
-    flex-wrap:wrap;
-  }
-  .stat{
-    background:rgba(255,255,255,0.08);
-    border-radius:8px;
-    padding:8px 14px;
-    color:#fff;
-    font-size:12.5px;
-    min-width:130px;
-  }
-  .stat b{
-    display:block;
-    font-size:19px;
-    font-weight:700;
-  }
   .controls{
     background:var(--pure-white);
     padding:16px 28px;
@@ -653,8 +633,6 @@
     <p class="sub">HUB International South Florida &mdash; Specialty Markets Reference</p>
   </div>
 </header>
-
-<div class="stats-bar" id="statsBar"></div>
 
 <div class="tabs">
   <button class="tab-btn active" id="tabMarkets" data-tab="markets">Markets</button>
@@ -2100,24 +2078,6 @@ function isStale(updated){
   return months >= 6;
 }
 
-function buildStats(){
-  const total = DATA.length;
-  const gapCount = DATA.filter(d => d.gap).length;
-  const wcCount = DATA.filter(d => d.wc_only).length;
-  const staleCount = DATA.filter(d => isStale(d.updated)).length;
-  const stateSet = new Set();
-  DATA.forEach(d => statesInRecord(d).forEach(s => stateSet.add(s)));
-  const bar = document.getElementById('statsBar');
-  bar.innerHTML = `
-    <div class="stat"><b>${total}</b>Total Markets</div>
-    <div class="stat"><b>${total - wcCount}</b>Fleet / Auto Markets</div>
-    <div class="stat"><b>${wcCount}</b>WC-for-Trucking Markets</div>
-    <div class="stat"><b>${gapCount}</b>Need Verification</div>
-    <div class="stat"><b>${staleCount}</b>Stale (6+ Months)</div>
-    <div class="stat"><b>${stateSet.size}</b>Distinct States Referenced</div>
-  `;
-}
-
 function populateStateFilter(){
   const present = new Set();
   DATA.forEach(d => statesInRecord(d).forEach(s => present.add(s)));
@@ -2554,7 +2514,6 @@ document.getElementById('sortBy').value = state.sortBy;
 document.getElementById('contactSearch').value = state.contactSearch;
 document.getElementById('btnGap').classList.toggle('active', state.gapOnly);
 setMode(state.mode, false);
-buildStats();
 populateStateFilter();
 buildTagChips();
 render();
