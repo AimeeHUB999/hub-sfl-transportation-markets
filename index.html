@@ -429,6 +429,12 @@
   .card-head{
     cursor:pointer;
   }
+  .card{
+    cursor:pointer;
+  }
+  .card a, .card button{
+    cursor:pointer;
+  }
   .chevron{
     font-size:13px;
     color:var(--charcoal-gray);
@@ -2233,9 +2239,9 @@ function render(){
   fleetGrid.innerHTML = fleet.map(cardHtml).join('');
   wcGrid.innerHTML = (state.mode === 'fleet') ? '' : wc.map(cardHtml).join('');
 
-  document.querySelectorAll('.card-head[data-action="toggle-card"]').forEach(head => {
-    head.addEventListener('click', () => {
-      const card = head.closest('.card');
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if(e.target.closest('a, button')) return;
       const name = card.dataset.name;
       if(state.openCards.has(name)){
         state.openCards.delete(name);
